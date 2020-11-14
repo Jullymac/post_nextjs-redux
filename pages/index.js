@@ -1,16 +1,23 @@
 import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
-import UserDetails from "../Components/UserDetails";
+import { storeWrapper } from "./../store";
+import UserDetails from "../components/UserDetails";
 import styles from "../styles/Home.module.css";
 import { settingsUpdateLang } from "../store/actions/user/settings";
 import { userUpdate, userReset } from "../store/actions/user";
+import { postsUpdateList } from "../store/actions/posts";
 
-export default function Home() {
+const Home = () => {
   const dispatch = useDispatch();
+
+  // Example get store state
   const { language } = useSelector((state) => state.settings);
   const { id, fullName } = useSelector((state) => state.user);
-  const isLoggedIn = id !== null;
+  const posts = useSelector((state) => state.posts);
 
+  console.debug(1, { posts });
+
+  // Examples dispatch
   const handleSwitchLang = () => {
     const newLang = language === "pt-br" ? "en" : "pt-br";
     dispatch(settingsUpdateLang(newLang));
@@ -53,7 +60,7 @@ export default function Home() {
             id={id}
             language={language}
             name={fullName}
-            isLoggedIn={isLoggedIn}
+            isLoggedIn={id !== null}
             onSwitchLanguage={handleSwitchLang}
             onLogin={handleLogin}
             onLogout={handleLogout}
@@ -91,4 +98,24 @@ export default function Home() {
       </footer>
     </div>
   );
-}
+};
+
+export const getServerSideProps = storeWrapper.getServerSideProps(
+  async ({ store }) => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const posts = await res.json();
+
+    // Example get store state server side
+    const state = store.getState();
+    const { postsPerPage } = state.settings;
+
+    //Example dispatch server side
+    store.dispatch(postsUpdateList(posts.slice(0, postsPerPage)));
+
+    return {
+      props: {},
+    };
+  }
+);
+
+export default Home;

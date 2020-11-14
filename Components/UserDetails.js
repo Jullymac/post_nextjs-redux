@@ -27,12 +27,12 @@ const UserDetails = ({
       </button>
       {!isLoggedIn && (
         <button type="button" onClick={onLogin}>
-          Login
+          Set user
         </button>
       )}
       {isLoggedIn && (
         <button type="button" onClick={onLogout}>
-          Logout
+          Remove user
         </button>
       )}
     </>

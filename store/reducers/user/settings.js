@@ -3,6 +3,7 @@ import { USER_SETTINGS_UPDATE_LANGUAGE } from "../../actions";
 
 const initialState = {
   language: "pt-br",
+  postsPerPage: 4,
 };
 
 const reducer = (state = initialState, action) => {
