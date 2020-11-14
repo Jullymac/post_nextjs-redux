@@ -15,8 +15,6 @@ const Home = () => {
   const { id, fullName } = useSelector((state) => state.user);
   const posts = useSelector((state) => state.posts);
 
-  console.debug(1, { posts });
-
   // Examples dispatch
   const handleSwitchLang = () => {
     const newLang = language === "pt-br" ? "en" : "pt-br";
@@ -39,11 +37,18 @@ const Home = () => {
     dispatch(userReset());
   };
 
+  const truncateString = (text, count) =>
+    text.length > count ? `${text.substring(0, count)}...` : text;
+
   return (
     <div className={styles.container}>
       <Head>
         <title>Project: NextJs + Redux + Saga</title>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
       </Head>
 
       <main className={styles.main}>
@@ -68,25 +73,12 @@ const Home = () => {
         </section>
 
         <section className={styles.grid}>
-          <article className={styles.card}>
-            <h3>Post title 1</h3>
-            <p>Description here</p>
-          </article>
-
-          <article className={styles.card}>
-            <h3>Post title 2</h3>
-            <p>Description here</p>
-          </article>
-
-          <article className={styles.card}>
-            <h3>Post title 3</h3>
-            <p>Description here</p>
-          </article>
-
-          <article className={styles.card}>
-            <h3>Post title 4</h3>
-            <p>Description here</p>
-          </article>
+          {posts.map((post) => (
+            <article key={post.id} className={styles.card}>
+              <h3>{truncateString(post.title, 15)}</h3>
+              <p>{truncateString(post.body, 90)}</p>
+            </article>
+          ))}
         </section>
       </main>
 
