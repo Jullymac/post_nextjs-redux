@@ -55,7 +55,7 @@ const Home = () => {
         <h1 className={styles.title}>Project: NextJs + Redux</h1>
 
         <p className={styles.description}>
-          <a href="https://bit.ly/35e8aN3" target="_blank">
+          <a href="https://bit.ly/3lAQT7q" target="_blank">
             Click here to check the tutorial
           </a>
         </p>
