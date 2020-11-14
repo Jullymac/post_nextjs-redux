@@ -1,15 +1,15 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore } from "redux";
+import { createWrapper } from "next-redux-wrapper";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
-import reducers from "./reducers/index";
+import reducers from "./reducers";
 
-export function makeStore(initialState) {
+const makeStore = (initialState) => {
   // Create store
-  const store = createStore(
-    reducers,
-    initialState,
-    composeWithDevTools(applyMiddleware())
-  );
+  const store = createStore(reducers, initialState, composeWithDevTools());
 
   // Return store
   return store;
-}
+};
+
+// export an assembled wrapper
+export const storeWrapper = createWrapper(makeStore, { debug: false });
