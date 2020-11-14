@@ -43,7 +43,7 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Project: NextJs + Redux + Saga</title>
+        <title>Project: NextJs + Redux</title>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
         <meta
           name="viewport"
@@ -52,7 +52,7 @@ const Home = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Project: NextJs + Redux + Saga</h1>
+        <h1 className={styles.title}>Project: NextJs + Redux</h1>
 
         <p className={styles.description}>
           <a href="https://bit.ly/35e8aN3" target="_blank">

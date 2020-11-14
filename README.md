@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 Clone this project and install all dependencies:
 
 ```bash
-git clone https://github.com/Jullymac/post_nextjs-redux-saga.git
+git clone https://github.com/Jullymac/post_nextjs-redux.git
 npm install
 ```
 
